@@ -1,4 +1,4 @@
-# Gitea
+# GitClaw - an agent first fork of Gitea
 
 [![compliance](https://github.com/KafClaw/GitClaw/actions/workflows/pull-compliance.yml/badge.svg)](https://github.com/KafClaw/GitClaw/actions/workflows/pull-compliance.yml)
 [![db-tests](https://github.com/KafClaw/GitClaw/actions/workflows/pull-db-tests.yml/badge.svg)](https://github.com/KafClaw/GitClaw/actions/workflows/pull-db-tests.yml)
