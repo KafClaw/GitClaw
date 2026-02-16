@@ -21,14 +21,16 @@
 			<span class="default-text">{{ctx.RenderUtils.RenderThemeItem ctx.CurrentWebTheme 16}}</span>
 			<div class="menu theme-menu"></div>
 		</div>
-		<div class="ui dropdown upward">
-			<span class="flex-text-inline">{{svg "octicon-globe" 14}} {{ctx.Locale.LangName}}</span>
-			<div class="menu language-menu">
-				{{range .AllLangs -}}
-				<a lang="{{.Lang}}" data-url="{{AppSubUrl}}/?lang={{.Lang}}" class="item {{if eq ctx.Locale.Lang .Lang}}selected{{end}}">{{.Name}}</a>
-				{{end -}}
+		{{if gt (len .AllLangs) 1}}
+			<div class="ui dropdown upward">
+				<span class="flex-text-inline">{{svg "octicon-globe" 14}} {{ctx.Locale.LangName}}</span>
+				<div class="menu language-menu">
+					{{range .AllLangs -}}
+					<a lang="{{.Lang}}" data-url="{{AppSubUrl}}/?lang={{.Lang}}" class="item {{if eq ctx.Locale.Lang .Lang}}selected{{end}}">{{.Name}}</a>
+					{{end -}}
+				</div>
 			</div>
-		</div>
+		{{end}}
 		<a href="{{AssetUrlPrefix}}/licenses.txt">{{ctx.Locale.Tr "licenses"}}</a>
 		{{if .EnableSwagger}}<a href="{{AppSubUrl}}/api/swagger">API</a>{{end}}
 		{{template "custom/extra_links_footer" .}}
