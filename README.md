@@ -1,15 +1,10 @@
 # Gitea
 
-[![](https://github.com/go-gitea/gitea/actions/workflows/release-nightly.yml/badge.svg?branch=main)](https://github.com/go-gitea/gitea/actions/workflows/release-nightly.yml?query=branch%3Amain "Release Nightly")
-[![](https://img.shields.io/discord/322538954119184384.svg?logo=discord&logoColor=white&label=Discord&color=5865F2)](https://discord.gg/Gitea "Join the Discord chat at https://discord.gg/Gitea")
-[![](https://goreportcard.com/badge/code.gitea.io/gitea)](https://goreportcard.com/report/code.gitea.io/gitea "Go Report Card")
-[![](https://pkg.go.dev/badge/code.gitea.io/gitea?status.svg)](https://pkg.go.dev/code.gitea.io/gitea "GoDoc")
-[![](https://img.shields.io/github/release/go-gitea/gitea.svg)](https://github.com/go-gitea/gitea/releases/latest "GitHub release")
-[![](https://www.codetriage.com/go-gitea/gitea/badges/users.svg)](https://www.codetriage.com/go-gitea/gitea "Help Contribute to Open Source")
-[![](https://opencollective.com/gitea/tiers/backers/badge.svg?label=backers&color=brightgreen)](https://opencollective.com/gitea "Become a backer/sponsor of gitea")
-[![](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT "License: MIT")
-[![Contribute with Gitpod](https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?logo=gitpod&color=green)](https://gitpod.io/#https://github.com/go-gitea/gitea)
-[![](https://badges.crowdin.net/gitea/localized.svg)](https://translate.gitea.com "Crowdin")
+[![compliance](https://github.com/KafClaw/GitClaw/actions/workflows/pull-compliance.yml/badge.svg)](https://github.com/KafClaw/GitClaw/actions/workflows/pull-compliance.yml)
+[![db-tests](https://github.com/KafClaw/GitClaw/actions/workflows/pull-db-tests.yml/badge.svg)](https://github.com/KafClaw/GitClaw/actions/workflows/pull-db-tests.yml)
+[![release-docker](https://github.com/KafClaw/GitClaw/actions/workflows/release-docker.yml/badge.svg)](https://github.com/KafClaw/GitClaw/actions/workflows/release-docker.yml)
+[![release](https://img.shields.io/github/v/release/KafClaw/GitClaw)](https://github.com/KafClaw/GitClaw/releases)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## GitClaw Hard Fork
 
