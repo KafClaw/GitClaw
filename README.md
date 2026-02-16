@@ -57,7 +57,7 @@ To quickly deploy your own dedicated Gitea instance on Gitea Cloud, you can star
 
 ## Documentation
 
-You can find comprehensive documentation on our official [documentation website](https://docs.gitea.com/).
+You can find comprehensive documentation on Gitea's official [documentation website](https://docs.gitea.com/).
 
 It includes installation, administration, usage, development, contributing guides, and more to help you get started and explore all features effectively.
 
@@ -100,27 +100,11 @@ Expected workflow is: Fork -> Patch -> Push -> Pull Request
 > 1. **YOU MUST READ THE [CONTRIBUTORS GUIDE](CONTRIBUTING.md) BEFORE STARTING TO WORK ON A PULL REQUEST.**
 > 2. If you have found a vulnerability in the project, please write privately to **security@gitea.io**. Thanks!
 
-## Translating
-
-[![Crowdin](https://badges.crowdin.net/gitea/localized.svg)](https://translate.gitea.com)
-
-Translations are done through [Crowdin](https://translate.gitea.com). If you want to translate to a new language, ask one of the managers in the Crowdin project to add a new language there.
-
-You can also just create an issue for adding a language or ask on Discord on the #translation channel. If you need context or find some translation issues, you can leave a comment on the string or ask on Discord. For general translation questions there is a section in the docs. Currently a bit empty, but we hope to fill it as questions pop up.
-
-Get more information from [documentation](https://docs.gitea.com/contributing/localization).
-
 ## Official and Third-Party Projects
 
 We provide an official [go-sdk](https://gitea.com/gitea/go-sdk), a CLI tool called [tea](https://gitea.com/gitea/tea) and an [action runner](https://gitea.com/gitea/act_runner) for Gitea Action.
 
 We maintain a list of Gitea-related projects at [gitea/awesome-gitea](https://gitea.com/gitea/awesome-gitea), where you can discover more third-party projects, including SDKs, plugins, themes, and more.
-
-## Communication
-
-[![](https://img.shields.io/discord/322538954119184384.svg?logo=discord&logoColor=white&label=Discord&color=5865F2)](https://discord.gg/Gitea "Join the Discord chat at https://discord.gg/Gitea")
-
-If you have questions that are not covered by the [documentation](https://docs.gitea.com/), you can get in contact with us on our [Discord server](https://discord.gg/Gitea) or create a post in the [discourse forum](https://forum.gitea.com/).
 
 ## Authors
 
