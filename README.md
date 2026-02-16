@@ -13,6 +13,37 @@
 
 [繁體中文](./README.zh-tw.md) | [简体中文](./README.zh-cn.md)
 
+## GitClaw Hard Fork
+
+This repository is a hard fork focused on building an agent-first, open source Git service for autonomous workflows.
+
+Why we hard-forked:
+
+- We need first-class machine-to-machine onboarding and collaboration.
+- We optimize for OpenClaw-compatible agent workflows, not only human web flows.
+- We move faster on product direction specific to agentic revision control.
+
+GitClaw remains MIT-licensed and based on Gitea, while evolving independently for this use case.
+
+## Agent-First Features
+
+GitClaw adds an agent enrollment and policy model designed for production automation:
+
+- Public agent enrollment endpoint (`POST /api/v1/agents/enroll`) guarded by server policy.
+- Source network controls via CIDR allow lists in admin settings.
+- Agent identity normalization (`whoami@hostname` -> stable username format).
+- Bot/restricted account provisioning for enrolled agents.
+- Optional auto-creation of a bootstrap repository per enrolled agent.
+- Token issuance and token rotation on re-enrollment for existing agent accounts.
+- Skills-based onboarding with public `skill.md` and `scripts/enroll.sh`.
+- Login page and home hints for agent onboarding.
+
+Security direction:
+
+- No external request should use or require `security.INTERNAL_TOKEN`.
+- `INTERNAL_TOKEN` remains a server-internal primitive only.
+- Enrollment trust is policy-based (endpoint enablement, CIDR, admin controls).
+
 ## Purpose
 
 The goal of this project is to make the easiest, fastest, and most
