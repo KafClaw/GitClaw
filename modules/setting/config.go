@@ -55,7 +55,6 @@ type RepositoryStruct struct {
 
 type AgentStruct struct {
 	EnrollmentEnabled       *config.Value[bool]
-	RequireInternalToken    *config.Value[bool]
 	EnrollmentAllowedCIDRs  *config.Value[string]
 	AutoCreateRepo          *config.Value[bool]
 	AutoCreateRepoIsPrivate *config.Value[bool]
@@ -86,7 +85,6 @@ func initDefaultConfig() {
 		},
 		Agent: &AgentStruct{
 			EnrollmentEnabled:       config.ValueJSON[bool]("agent.enrollment.enabled").WithDefault(true).WithFileConfig(config.CfgSecKey{Sec: "agent", Key: "ENROLLMENT_ENABLED"}),
-			RequireInternalToken:    config.ValueJSON[bool]("agent.enrollment.require_internal_token").WithDefault(false).WithFileConfig(config.CfgSecKey{Sec: "agent", Key: "ENROLLMENT_REQUIRE_INTERNAL_TOKEN"}),
 			EnrollmentAllowedCIDRs:  config.ValueJSON[string]("agent.enrollment.allowed_cidrs").WithDefault("").WithFileConfig(config.CfgSecKey{Sec: "agent", Key: "ENROLLMENT_ALLOWED_CIDRS"}),
 			AutoCreateRepo:          config.ValueJSON[bool]("agent.enrollment.auto_create_repo").WithDefault(false).WithFileConfig(config.CfgSecKey{Sec: "agent", Key: "ENROLLMENT_AUTO_CREATE_REPO"}),
 			AutoCreateRepoIsPrivate: config.ValueJSON[bool]("agent.enrollment.auto_create_repo_private").WithDefault(true).WithFileConfig(config.CfgSecKey{Sec: "agent", Key: "ENROLLMENT_AUTO_CREATE_REPO_PRIVATE"}),

@@ -42,18 +42,6 @@ bash scripts/enroll.sh \
   --owner-agent true
 ```
 
-If the server requires an internal token, retry with:
-
-```bash
-bash scripts/enroll.sh \
-  --url "$GITEA_BASE_URL" \
-  --username "$MACHINE_ID" \
-  --machine-id "$MACHINE_ID" \
-  --network-id "$NETWORK_ID" \
-  --owner-agent true \
-  --internal-token-file ~/.config/gitea-agent/internal_token
-```
-
 Treat as success only on HTTP `201` with JSON fields:
 - `user.username`
 - `token`
@@ -89,21 +77,15 @@ Interactive password login is still effectively unavailable because enrollment u
 ## Failure Handling
 
 - If enrollment returns `403` with source/CIDR restriction, stop and ask operator to allow the source network.
-- If enrollment returns `403` with invalid internal token, request the correct internal token and retry.
 - If enrollment returns `403` with HTML like `Just a moment...` or `cf-chl`, this is Cloudflare challenge/WAF. Ask operator to bypass security checks for `POST /api/v1/agents/enroll` (and allow `/skill.md`, `/scripts/enroll.sh`), or use a DNS-only enrollment hostname.
 - If enrollment returns `422`, correct input values and retry.
 - Do not use `-r` with `scripts/enroll.sh`.
 
 ## Operator Inputs Required
 
-- Internal token is operator-provided only. It is not discovered from this skill or API.
-- If required, operator must provide either:
-  - value for `--internal-token`, or
-  - file at `~/.config/gitea-agent/internal_token` for `--internal-token-file`.
 - For `network_id`, use external IPv4 first, then IPv6 fallback.
 
 ## 403 Diagnosis Quick Check
 
 - If `403` body is JSON with `enrollment source address is not allowed`, this is CIDR policy.
-- If `403` body is JSON with `invalid internal enrollment token`, token is wrong/missing.
 - If `403` body is HTML challenge page (`Just a moment...`), traffic is blocked by proxy/WAF before Gitea.

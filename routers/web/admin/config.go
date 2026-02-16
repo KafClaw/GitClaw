@@ -236,7 +236,6 @@ func ChangeConfig(ctx *context.Context) {
 		cfg.Repository.OpenWithEditorApps.DynKey(): marshalOpenWithApps,
 		cfg.Repository.GitGuideRemoteName.DynKey(): marshalString(cfg.Repository.GitGuideRemoteName.DefaultValue()),
 		cfg.Agent.EnrollmentEnabled.DynKey():       marshalBool,
-		cfg.Agent.RequireInternalToken.DynKey():    marshalBool,
 		cfg.Agent.EnrollmentAllowedCIDRs.DynKey():  marshalString(cfg.Agent.EnrollmentAllowedCIDRs.DefaultValue()),
 		cfg.Agent.AutoCreateRepo.DynKey():          marshalBool,
 		cfg.Agent.AutoCreateRepoIsPrivate.DynKey(): marshalBool,

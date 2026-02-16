@@ -10,13 +10,6 @@
 			</div>
 		</dd>
 		<div class="divider"></div>
-		<dt>{{ctx.Locale.Tr "admin.config.agent_require_internal_token"}}</dt>
-		<dd>
-			<div class="ui toggle checkbox" data-tooltip-content="{{ctx.Locale.Tr "admin.config.agent_require_internal_token_desc"}}">
-				<input type="checkbox" data-config-dyn-key="agent.enrollment.require_internal_token" {{if .SystemConfig.Agent.RequireInternalToken.Value ctx}}checked{{end}}><label></label>
-			</div>
-		</dd>
-		<div class="divider"></div>
 		<dt>{{ctx.Locale.Tr "admin.config.agent_auto_create_repo"}}</dt>
 		<dd>
 			<div class="ui toggle checkbox" data-tooltip-content="{{ctx.Locale.Tr "admin.config.agent_auto_create_repo"}}">

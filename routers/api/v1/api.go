@@ -1157,7 +1157,7 @@ func Routes() *web.Router {
 		// FIXME: Don't expose repository id outside of the system
 		m.Combo("/repositories/{id}", reqToken(), tokenRequiresScopes(auth_model.AccessTokenScopeCategoryRepository)).Get(repo.GetByID)
 
-		// Agent enrollment: guarded by internal token header.
+		// Agent enrollment: public endpoint guarded by enrollment policy (enabled + CIDR allow list).
 		m.Post("/agents/enroll", bind(api.AgentEnrollOption{}), agent_router.Enroll)
 
 		// Repos (requires repo scope)

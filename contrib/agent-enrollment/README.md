@@ -6,27 +6,12 @@ This folder contains helper assets for running an agent-focused Gitea instance.
 
 ```bash
 cd ~/gitea
-export INTERNAL_TOKEN='change-me'
 bash contrib/agent-enrollment/start-instance.sh
 ```
 
-Generate a strong token once:
-
-```bash
-openssl rand -hex 32
-```
-
-Store it securely (preferred):
-
-```bash
-mkdir -p ~/.config/gitea-agent
-umask 077
-printf '%s\n' '<paste-token-here>' > ~/.config/gitea-agent/internal_token
-chmod 600 ~/.config/gitea-agent/internal_token
-INTERNAL_TOKEN_FILE=~/.config/gitea-agent/internal_token bash contrib/agent-enrollment/start-instance.sh
-```
-
-Do not commit tokens into git, `SKILL.md`, or shell history.
+The start script generates and persists `security.INTERNAL_TOKEN` server-side at:
+`~/gitea-agent/custom/conf/internal_token` (mode `0600`).
+Do not expose this file to clients, logs, or skills.
 
 The script rewrites `~/gitea-agent/custom/conf/app.ini` every start, so `rsync --delete` deploys do not remove your runtime configuration.
 By default it binds Gitea to `127.0.0.1:3000` for reverse-proxy-only exposure.
@@ -77,11 +62,11 @@ repo.scalytics.io {
 
 Hardening notes:
 
-- Do not inline secrets or internal tokens in `Caddyfile` responses.
+- Never expose `security.INTERNAL_TOKEN` to enrollment clients.
+- Do not inline secrets or tokens in `Caddyfile` responses.
 - Do not serve repo roots (`/home/kafclaw/gitea`) as a generic static site.
 - Expose only explicitly allowed public files (for example `/skill.md` and `/scripts/enroll.sh`), not arbitrary directory browsing.
 - Ensure the Caddy runtime user can traverse the selected path (for example `chmod o+rx /home/<user>`), or place the public skill file under a dedicated world-readable directory.
-- Keep tokens in `~/.config/gitea-agent/internal_token` with mode `0600`; never in `SKILL.md`.
 
 ## 3. Create the first admin account (one time)
 
@@ -115,18 +100,6 @@ bash skills/gitea/scripts/enroll.sh \
 ```
 
 `network-id` policy: always prefer external IPv4 first, then IPv6 fallback.
-
-If `Require internal token` is enabled in Admin Settings, add:
-
-```bash
---internal-token "$INTERNAL_TOKEN"
-```
-
-Or safer:
-
-```bash
---internal-token-file ~/.config/gitea-agent/internal_token
-```
 
 ## 5. Configure AI Agent enrollment in Admin Settings
 
@@ -173,7 +146,6 @@ If you keep Cloudflare proxy ON:
 ## 6.1 403 troubleshooting
 
 - `403` with source/CIDR text: allow the real source network (or Cloudflare edge ranges if proxied).
-- `403` with invalid internal token text: token is wrong/expired; rotate and retry.
 - `network-id` is metadata for the enrolled agent record. It does not bypass source-IP policy checks.
 
 ## 7. Reacquire / rotate agent token

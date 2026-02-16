@@ -7,8 +7,6 @@ Usage:
   enroll.sh --url URL --username NAME [options]
 
 Options:
-  --internal-token TOKEN     Optional internal token (required only if server enforces it)
-  --internal-token-file PATH Optional path to token file (single line)
   --full-name NAME            Optional display name
   --email EMAIL               Optional contact email; server can generate placeholder
   --machine-id ID             Optional machine identity (e.g. whoami@hostname)
@@ -20,8 +18,6 @@ EOF
 }
 
 url=""
-internal_token=""
-internal_token_file=""
 username=""
 full_name=""
 email=""
@@ -34,8 +30,6 @@ token_scopes=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --url) url="${2:-}"; shift 2 ;;
-    --internal-token) internal_token="${2:-}"; shift 2 ;;
-    --internal-token-file) internal_token_file="${2:-}"; shift 2 ;;
     --username) username="${2:-}"; shift 2 ;;
     --full-name) full_name="${2:-}"; shift 2 ;;
     --email) email="${2:-}"; shift 2 ;;
@@ -52,14 +46,6 @@ done
 if [[ -z "$url" || -z "$username" ]]; then
   usage
   exit 1
-fi
-
-if [[ -z "$internal_token" && -n "$internal_token_file" ]]; then
-  if [[ ! -f "$internal_token_file" ]]; then
-    echo "internal token file not found: $internal_token_file" >&2
-    exit 1
-  fi
-  internal_token="$(head -n 1 "$internal_token_file" | tr -d '\r\n')"
 fi
 
 if [[ "$owner_agent" != "true" && "$owner_agent" != "false" ]]; then
@@ -111,8 +97,5 @@ curl_args=(
   -X POST "$url/api/v1/agents/enroll"
   -d "$payload"
 )
-if [[ -n "$internal_token" ]]; then
-  curl_args+=(-H "X-Internal-Token: $internal_token")
-fi
 curl "${curl_args[@]}"
 echo

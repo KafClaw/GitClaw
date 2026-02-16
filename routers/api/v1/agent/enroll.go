@@ -4,7 +4,6 @@
 package agent
 
 import (
-	"crypto/subtle"
 	"errors"
 	"fmt"
 	"net"
@@ -28,8 +27,7 @@ import (
 )
 
 const (
-	internalTokenHeader = "X-Internal-Token"
-	defaultTokenName    = "agent-enroll-token"
+	defaultTokenName = "agent-enroll-token"
 )
 
 // Enroll creates a new agent account and a bootstrap access token.
@@ -42,10 +40,6 @@ func Enroll(ctx *context.APIContext) {
 	// produces:
 	// - application/json
 	// parameters:
-	// - name: X-Internal-Token
-	//   in: header
-	//   type: string
-	//   required: false
 	// - name: body
 	//   in: body
 	//   schema:
@@ -58,7 +52,6 @@ func Enroll(ctx *context.APIContext) {
 	//   "422":
 	//     "$ref": "#/responses/validationError"
 
-	token := ctx.Req.Header.Get(internalTokenHeader)
 	if !agent_service.IsEnrollmentEnabled(ctx.Req.Context()) {
 		ctx.APIError(http.StatusForbidden, "agent enrollment is disabled")
 		return
@@ -67,13 +60,6 @@ func Enroll(ctx *context.APIContext) {
 		ctx.APIError(http.StatusForbidden, "enrollment source address is not allowed")
 		return
 	}
-	if setting.Config().Agent.RequireInternalToken.Value(ctx.Req.Context()) {
-		if setting.InternalToken == "" || subtle.ConstantTimeCompare([]byte(token), []byte(setting.InternalToken)) != 1 {
-			ctx.APIError(http.StatusForbidden, "invalid internal enrollment token")
-			return
-		}
-	}
-
 	form := web.GetForm(ctx).(*api.AgentEnrollOption)
 	normalizedUsername, err := agent_service.NormalizeEnrollmentUsername(form.Username)
 	if err != nil {
