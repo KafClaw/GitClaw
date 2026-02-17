@@ -584,7 +584,6 @@ func registerWebRoutes(m *web.Router) {
 		})
 		m.Group("/appearance", func() {
 			m.Get("", user_setting.Appearance)
-			m.Post("/language", web.Bind(forms.UpdateLanguageForm{}), user_setting.UpdateUserLang)
 			m.Post("/hidden_comments", user_setting.UpdateUserHiddenComments)
 			m.Post("/theme", web.Bind(forms.UpdateThemeForm{}), user_setting.UpdateUIThemePost)
 		})

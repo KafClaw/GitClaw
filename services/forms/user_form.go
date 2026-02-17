@@ -227,17 +227,6 @@ func (f *UpdateProfileForm) Validate(req *http.Request, errs binding.Errors) bin
 	return middleware.Validate(errs, ctx.Data, f, ctx.Locale)
 }
 
-// UpdateLanguageForm form for updating profile
-type UpdateLanguageForm struct {
-	Language string
-}
-
-// Validate validates the fields
-func (f *UpdateLanguageForm) Validate(req *http.Request, errs binding.Errors) binding.Errors {
-	ctx := context.GetValidateContext(req)
-	return middleware.Validate(errs, ctx.Data, f, ctx.Locale)
-}
-
 // Avatar types
 const (
 	AvatarLocal  string = "local"

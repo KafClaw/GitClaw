@@ -24,11 +24,8 @@ import (
 	"code.gitea.io/gitea/modules/setting"
 	"code.gitea.io/gitea/modules/structs"
 	"code.gitea.io/gitea/modules/templates"
-	"code.gitea.io/gitea/modules/translation"
 	"code.gitea.io/gitea/modules/typesniffer"
-	"code.gitea.io/gitea/modules/util"
 	"code.gitea.io/gitea/modules/web"
-	"code.gitea.io/gitea/modules/web/middleware"
 	"code.gitea.io/gitea/services/context"
 	"code.gitea.io/gitea/services/forms"
 	user_service "code.gitea.io/gitea/services/user"
@@ -384,36 +381,6 @@ func UpdateUIThemePost(ctx *context.Context) {
 		ctx.Flash.Success(ctx.Tr("settings.theme_update_success"))
 	}
 
-	ctx.Redirect(setting.AppSubURL + "/user/settings/appearance")
-}
-
-// UpdateUserLang update a user's language
-func UpdateUserLang(ctx *context.Context) {
-	form := web.GetForm(ctx).(*forms.UpdateLanguageForm)
-	ctx.Data["Title"] = ctx.Tr("settings_title")
-	ctx.Data["PageIsSettingsAppearance"] = true
-
-	if form.Language != "" {
-		if !util.SliceContainsString(setting.Langs, form.Language) {
-			ctx.Flash.Error(ctx.Tr("settings.update_language_not_found", form.Language))
-			ctx.Redirect(setting.AppSubURL + "/user/settings/appearance")
-			return
-		}
-	}
-
-	opts := &user_service.UpdateOptions{
-		Language: optional.Some(form.Language),
-	}
-	if err := user_service.UpdateUser(ctx, ctx.Doer, opts); err != nil {
-		ctx.ServerError("UpdateUser", err)
-		return
-	}
-
-	// Update the language to the one we just set
-	middleware.SetLocaleCookie(ctx.Resp, ctx.Doer.Language, 0)
-
-	log.Trace("User settings updated: %s", ctx.Doer.Name)
-	ctx.Flash.Success(translation.NewLocale(ctx.Doer.Language).TrString("settings.update_language_success"))
 	ctx.Redirect(setting.AppSubURL + "/user/settings/appearance")
 }
 

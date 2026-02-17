@@ -35,32 +35,6 @@
 			</form>
 		</div>
 
-		{{if gt (len .AllLangs) 1}}
-			<!-- Language -->
-			<h4 class="ui top attached header">
-				{{ctx.Locale.Tr "settings.language"}}
-			</h4>
-			<div class="ui attached segment">
-				<form class="ui form" action="{{.Link}}/language" method="post">
-					<div class="field">
-						<div class="ui language selection dropdown" id="language">
-							<input name="language" type="hidden" value="{{.SignedUser.Language}}">
-							{{svg "octicon-triangle-down" 14 "dropdown icon"}}
-							<div class="text">{{range .AllLangs}}{{if eq $.SignedUser.Language .Lang}}{{.Name}}{{end}}{{end}}</div>
-							<div class="menu">
-							{{range .AllLangs}}
-								<div class="item{{if eq $.SignedUser.Language .Lang}} active selected{{end}}" data-value="{{.Lang}}">{{.Name}}</div>
-							{{end}}
-							</div>
-						</div>
-					</div>
-					<div class="field">
-						<button class="ui primary button">{{ctx.Locale.Tr "settings.update_language"}}</button>
-					</div>
-				</form>
-			</div>
-		{{end}}
-
 		<!-- Shown comment event types -->
 		<h4 class="ui top attached header">
 			{{ctx.Locale.Tr "settings.hidden_comment_types"}}

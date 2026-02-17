@@ -85,7 +85,7 @@ func initDefaultConfig() {
 		},
 		Agent: &AgentStruct{
 			EnrollmentEnabled:       config.ValueJSON[bool]("agent.enrollment.enabled").WithDefault(true).WithFileConfig(config.CfgSecKey{Sec: "agent", Key: "ENROLLMENT_ENABLED"}),
-			EnrollmentAllowedCIDRs:  config.ValueJSON[string]("agent.enrollment.allowed_cidrs").WithDefault("").WithFileConfig(config.CfgSecKey{Sec: "agent", Key: "ENROLLMENT_ALLOWED_CIDRS"}),
+			EnrollmentAllowedCIDRs:  config.ValueJSON[string]("agent.enrollment.allowed_cidrs").WithDefault("127.0.0.1/32,::1/128").WithFileConfig(config.CfgSecKey{Sec: "agent", Key: "ENROLLMENT_ALLOWED_CIDRS"}),
 			AutoCreateRepo:          config.ValueJSON[bool]("agent.enrollment.auto_create_repo").WithDefault(false).WithFileConfig(config.CfgSecKey{Sec: "agent", Key: "ENROLLMENT_AUTO_CREATE_REPO"}),
 			AutoCreateRepoIsPrivate: config.ValueJSON[bool]("agent.enrollment.auto_create_repo_private").WithDefault(true).WithFileConfig(config.CfgSecKey{Sec: "agent", Key: "ENROLLMENT_AUTO_CREATE_REPO_PRIVATE"}),
 			AutoCreateRepoName:      config.ValueJSON[string]("agent.enrollment.auto_create_repo_name").WithDefault("{username}").WithFileConfig(config.CfgSecKey{Sec: "agent", Key: "ENROLLMENT_AUTO_CREATE_REPO_NAME"}),

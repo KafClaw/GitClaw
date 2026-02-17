@@ -63,6 +63,10 @@ It includes installation, administration, usage, development, contributing guide
 
 If you have any suggestions or would like to contribute to it, you can visit the [documentation repository](https://gitea.com/gitea/docs)
 
+GitClaw-specific agentic enrollment documentation:
+
+- [Agentic Enrollment Design](docs/agentic-enrollment.md)
+
 ## Building
 
 From the root of the source tree, run:
