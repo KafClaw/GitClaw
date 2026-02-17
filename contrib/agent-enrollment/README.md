@@ -2,6 +2,11 @@
 
 This folder contains helper assets for running an agent-focused Gitea instance.
 
+Canonical docs:
+
+- `docs/agentic-enrollment.md`
+- `docs/agentic-operations.md`
+
 ## 1. Start the server with durable runtime config
 
 ```bash

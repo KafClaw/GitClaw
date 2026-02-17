@@ -39,33 +39,16 @@ Security direction:
 
 ## Purpose
 
-The goal of this project is to make the easiest, fastest, and most
-painless way of setting up a self-hosted Git service.
-
-As Gitea is written in Go, it works across **all** the platforms and
-architectures that are supported by Go, including Linux, macOS, and
-Windows on x86, amd64, ARM and PowerPC architectures.
-This project has been
-[forked](https://blog.gitea.com/welcome-to-gitea/) from
-[Gogs](https://gogs.io) since November of 2016, but a lot has changed.
-
-For online demonstrations, you can visit [demo.gitea.com](https://demo.gitea.com).
-
-For accessing free Gitea service (with a limited number of repositories), you can visit [gitea.com](https://gitea.com/user/login).
-
-To quickly deploy your own dedicated Gitea instance on Gitea Cloud, you can start a free trial at [cloud.gitea.com](https://cloud.gitea.com).
+GitClaw is an agent-first Git service for self-hosted machine-to-machine workflows.
+It is built in Go and runs across Linux, macOS, and Windows on common architectures.
 
 ## Documentation
 
-You can find comprehensive documentation on Gitea's official [documentation website](https://docs.gitea.com/).
-
-It includes installation, administration, usage, development, contributing guides, and more to help you get started and explore all features effectively.
-
-If you have any suggestions or would like to contribute to it, you can visit the [documentation repository](https://gitea.com/gitea/docs)
-
-GitClaw-specific agentic enrollment documentation:
+GitClaw-specific docs:
 
 - [Agentic Enrollment Design](docs/agentic-enrollment.md)
+- [Agentic Operations Guide](docs/agentic-operations.md)
+- [Deployment Helpers](contrib/agent-enrollment/README.md)
 
 ## Building
 
@@ -106,9 +89,8 @@ Expected workflow is: Fork -> Patch -> Push -> Pull Request
 
 ## Official and Third-Party Projects
 
-We provide an official [go-sdk](https://gitea.com/gitea/go-sdk), a CLI tool called [tea](https://gitea.com/gitea/tea) and an [action runner](https://gitea.com/gitea/act_runner) for Gitea Action.
-
-We maintain a list of Gitea-related projects at [gitea/awesome-gitea](https://gitea.com/gitea/awesome-gitea), where you can discover more third-party projects, including SDKs, plugins, themes, and more.
+GitClaw currently focuses on core agent enrollment, policy, and Git workflow compatibility.
+Additional ecosystem links will be maintained in this repository as they are adopted.
 
 ## Authors
 
@@ -118,72 +100,5 @@ We maintain a list of Gitea-related projects at [gitea/awesome-gitea](https://gi
 ## License
 
 This project is licensed under the MIT License.
-See the [LICENSE](https://github.com/go-gitea/gitea/blob/main/LICENSE) file
+See the [LICENSE](LICENSE) file
 for the full license text.
-
-## Further information
-
-<details>
-<summary>Looking for an overview of the interface? Check it out!</summary>
-
-### Login/Register Page
-
-![Login](https://dl.gitea.com/screenshots/login.png)
-![Register](https://dl.gitea.com/screenshots/register.png)
-
-### User Dashboard
-
-![Home](https://dl.gitea.com/screenshots/home.png)
-![Issues](https://dl.gitea.com/screenshots/issues.png)
-![Pull Requests](https://dl.gitea.com/screenshots/pull_requests.png)
-![Milestones](https://dl.gitea.com/screenshots/milestones.png)
-
-### User Profile
-
-![Profile](https://dl.gitea.com/screenshots/user_profile.png)
-
-### Explore
-
-![Repos](https://dl.gitea.com/screenshots/explore_repos.png)
-![Users](https://dl.gitea.com/screenshots/explore_users.png)
-![Orgs](https://dl.gitea.com/screenshots/explore_orgs.png)
-
-### Repository
-
-![Home](https://dl.gitea.com/screenshots/repo_home.png)
-![Commits](https://dl.gitea.com/screenshots/repo_commits.png)
-![Branches](https://dl.gitea.com/screenshots/repo_branches.png)
-![Labels](https://dl.gitea.com/screenshots/repo_labels.png)
-![Milestones](https://dl.gitea.com/screenshots/repo_milestones.png)
-![Releases](https://dl.gitea.com/screenshots/repo_releases.png)
-![Tags](https://dl.gitea.com/screenshots/repo_tags.png)
-
-#### Repository Issue
-
-![List](https://dl.gitea.com/screenshots/repo_issues.png)
-![Issue](https://dl.gitea.com/screenshots/repo_issue.png)
-
-#### Repository Pull Requests
-
-![List](https://dl.gitea.com/screenshots/repo_pull_requests.png)
-![Pull Request](https://dl.gitea.com/screenshots/repo_pull_request.png)
-![File](https://dl.gitea.com/screenshots/repo_pull_request_file.png)
-![Commits](https://dl.gitea.com/screenshots/repo_pull_request_commits.png)
-
-#### Repository Actions
-
-![List](https://dl.gitea.com/screenshots/repo_actions.png)
-![Details](https://dl.gitea.com/screenshots/repo_actions_run.png)
-
-#### Repository Activity
-
-![Activity](https://dl.gitea.com/screenshots/repo_activity.png)
-![Contributors](https://dl.gitea.com/screenshots/repo_contributors.png)
-![Code Frequency](https://dl.gitea.com/screenshots/repo_code_frequency.png)
-![Recent Commits](https://dl.gitea.com/screenshots/repo_recent_commits.png)
-
-### Organization
-
-![Home](https://dl.gitea.com/screenshots/org_home.png)
-
-</details>
