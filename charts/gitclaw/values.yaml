@@ -1,0 +1,49 @@
+image:
+  repository: ghcr.io/kafclaw/gitclaw
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  httpPort: 3001
+  # Gitea default internal HTTP port is 3000
+  targetHttpPort: 3000
+  sshPort: 2222
+
+# Minimal embedded SQLite + local storage — dev only.
+config:
+  dbType: "sqlite3"
+  dbPath: "/var/lib/gitea/data/gitea.db"
+  appName: "GitClaw"
+  rootUrl: "http://localhost:3001/"
+
+persistence:
+  enabled: false
+  storageClass: ""
+  size: 5Gi
+
+resources:
+  limits: { cpu: 1000m, memory: 512Mi }
+  requests: { cpu: 200m, memory: 256Mi }
+
+probes:
+  liveness:
+    httpGet: { path: /, port: 3000 }
+    initialDelaySeconds: 30
+    periodSeconds: 30
+  readiness:
+    httpGet: { path: /, port: 3000 }
+    initialDelaySeconds: 10
+    periodSeconds: 10
+
+podSecurityContext:
+  fsGroup: 1000
+  runAsUser: 1000
+  runAsGroup: 1000
+
+serviceAccount:
+  create: true
+  name: ""
+
+labels:
+  app.kubernetes.io/part-of: ops-foundation

@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "gitclaw.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "gitclaw.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{- include "gitclaw.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "gitclaw.labels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "gitclaw.serviceAccountName" . }}
+      enableServiceLinks: false
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: gitclaw
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - { name: http, containerPort: 3000 }
+            - { name: ssh, containerPort: 2222 }
+          env:
+            - { name: GITEA__database__DB_TYPE, value: "{{ .Values.config.dbType }}" }
+            - { name: GITEA__database__PATH, value: "{{ .Values.config.dbPath }}" }
+            - { name: GITEA__server__APP_NAME, value: "{{ .Values.config.appName }}" }
+            - { name: GITEA__server__ROOT_URL, value: "{{ .Values.config.rootUrl }}" }
+            - { name: GITEA__server__SSH_PORT, value: "2222" }
+            - { name: GITEA__server__SSH_LISTEN_PORT, value: "2222" }
+            - { name: GITEA__log__LEVEL, value: "info" }
+            - { name: GITEA__security__INSTALL_LOCK, value: "true" }
+          livenessProbe:
+            {{- toYaml .Values.probes.liveness | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.probes.readiness | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/gitea
+            - name: config
+              mountPath: /etc/gitea
+      volumes:
+        - name: data
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "gitclaw.fullname" . }}-data
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+        - name: config
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "gitclaw.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "gitclaw.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - { name: http, port: {{ .Values.service.httpPort }}, targetPort: 3000 }
+    - { name: ssh, port: {{ .Values.service.sshPort }}, targetPort: 2222 }
+  selector:
+    {{- include "gitclaw.selectorLabels" . | nindent 4 }}
+---
+{{- if .Values.serviceAccount.create }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "gitclaw.serviceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "gitclaw.labels" . | nindent 4 }}
+{{- end }}
