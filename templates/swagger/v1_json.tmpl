@@ -1290,6 +1290,41 @@
         }
       }
     },
+    "/agents/enroll": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "agent"
+        ],
+        "summary": "Enroll a new agent account",
+        "operationId": "agentEnroll",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AgentEnrollOption"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/AgentEnrollResponse"
+          },
+          "403": {
+            "$ref": "#/responses/forbidden"
+          },
+          "422": {
+            "$ref": "#/responses/validationError"
+          }
+        }
+      }
+    },
     "/gitignore/templates": {
       "get": {
         "produces": [
