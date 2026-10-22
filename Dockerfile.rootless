@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 # Build stage
-FROM docker.io/library/golang:1.26-alpine3.23 AS build-env
+FROM docker.io/library/golang:1.26.10-alpine3.23 AS build-env
 
-ARG GOPROXY=direct
+ARG GOPROXY=https://proxy.golang.org,direct
 
 ARG GITEA_VERSION
 ARG TAGS="sqlite sqlite_unlock_notify"
