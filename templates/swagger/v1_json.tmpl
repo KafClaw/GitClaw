@@ -21854,6 +21854,86 @@
       },
       "x-go-package": "code.gitea.io/gitea/modules/structs"
     },
+    "AgentEnrollOption": {
+      "type": "object",
+      "title": "AgentEnrollOption describes a request to create an agent account.",
+      "required": [
+        "username"
+      ],
+      "properties": {
+        "email": {
+          "description": "Optional human-contact email. If omitted, the server generates a placeholder address.",
+          "type": "string",
+          "x-go-name": "Email"
+        },
+        "full_name": {
+          "type": "string",
+          "x-go-name": "FullName"
+        },
+        "machine_identity": {
+          "description": "Optional machine identity metadata (for example \"whoami@hostname\").",
+          "type": "string",
+          "x-go-name": "MachineIdentity"
+        },
+        "network_identifier": {
+          "description": "Optional network identifier metadata (for example \"10.10.0.12\").",
+          "type": "string",
+          "x-go-name": "NetworkIdentifier"
+        },
+        "owner_agent": {
+          "description": "OwnerAgent allows this agent to invite other agents.",
+          "type": "boolean",
+          "x-go-name": "OwnerAgent"
+        },
+        "token_name": {
+          "description": "TokenName is the personal access token label. Defaults to \"agent-enroll-token\".",
+          "type": "string",
+          "x-go-name": "TokenName"
+        },
+        "token_scopes": {
+          "description": "TokenScopes defaults to [\"write:repository\",\"write:user\"] when auto bootstrap repo is enabled,\notherwise to [\"public-only\",\"read:repository\"].",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "TokenScopes"
+        },
+        "username": {
+          "type": "string",
+          "x-go-name": "Username"
+        }
+      },
+      "x-go-package": "code.gitea.io/gitea/modules/structs"
+    },
+    "AgentEnrollResponse": {
+      "type": "object",
+      "title": "AgentEnrollResponse returns the created agent and bootstrap token.",
+      "properties": {
+        "is_owner_agent": {
+          "type": "boolean",
+          "x-go-name": "IsOwnerAgent"
+        },
+        "token": {
+          "type": "string",
+          "x-go-name": "Token"
+        },
+        "token_name": {
+          "type": "string",
+          "x-go-name": "TokenName"
+        },
+        "token_scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "TokenScopes"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        }
+      },
+      "x-go-package": "code.gitea.io/gitea/modules/structs"
+    },
     "AnnotatedTag": {
       "description": "AnnotatedTag represents an annotated tag",
       "type": "object",
@@ -29543,6 +29623,12 @@
         "$ref": "#/definitions/ActivityPub"
       }
     },
+    "AgentEnrollResponse": {
+      "description": "AgentEnrollResponse",
+      "schema": {
+        "$ref": "#/definitions/AgentEnrollResponse"
+      }
+    },
     "AnnotatedTag": {
       "description": "AnnotatedTag",
       "schema": {
@@ -30597,7 +30683,7 @@
     "parameterBodies": {
       "description": "parameterBodies",
       "schema": {
-        "$ref": "#/definitions/LockIssueOption"
+        "$ref": "#/definitions/AgentEnrollOption"
       }
     },
     "redirect": {

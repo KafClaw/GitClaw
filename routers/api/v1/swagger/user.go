@@ -55,3 +55,10 @@ type swaggerResponseBadgeList struct {
 	// in:body
 	Body []api.Badge `json:"body"`
 }
+
+// AgentEnrollResponse
+// swagger:response AgentEnrollResponse
+type swaggerResponseAgentEnrollResponse struct {
+	// in:body
+	Body api.AgentEnrollResponse `json:"body"`
+}

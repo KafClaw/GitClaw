@@ -227,4 +227,7 @@ type swaggerParameterBodies struct {
 
 	// in:body
 	LockIssueOption api.LockIssueOption
+
+	// in:body
+	AgentEnrollOption api.AgentEnrollOption
 }
